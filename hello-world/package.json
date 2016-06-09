@@ -1,0 +1,14 @@
+{
+  "name": "complete-dev-course",
+  "version": "1.0.0",
+  "description": "Hello React Test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Spencer Bigum",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
