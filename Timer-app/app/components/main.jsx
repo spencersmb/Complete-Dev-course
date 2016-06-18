@@ -10,7 +10,6 @@ let Main = (props) => {
         <Nav />
         <div className="row">
           <div className="columns small-centered medium-6 large-4">
-            <h1>Webpack Boilerplate V.2</h1>
             {props.children}
           </div>
         </div>

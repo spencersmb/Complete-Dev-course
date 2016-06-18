@@ -3,6 +3,7 @@ var options = {
   port: 35729
 };
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: [
@@ -24,6 +25,7 @@ module.exports = {
       Clock: 'app/components/clock.jsx',
       CountdownInput: 'app/components/countdown/countdownInput.jsx',
       Timer: 'app/components/timer/timer.jsx',
+      Controls: 'app/components/controls.jsx',
       Countdown: 'app/components/countdown/countdown.jsx'
     },
     extensions: [
@@ -51,6 +53,11 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       }
+    ]
+  },
+  sassLoader:{
+    includePaths: [
+        path.resolve( __dirname, './node_modules/foundation-sites/scss')
     ]
   },
   devtool: 'cheap-module-eval-source-map'

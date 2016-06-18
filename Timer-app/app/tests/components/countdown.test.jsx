@@ -41,5 +41,31 @@ describe('onSetCountdown', () => {
             done();
         },3001);
     });
+
+    it('Should pause and stop counting', (done) => {
+        var countdown = TestUtils.renderIntoDocument(<Countdown />);
+        countdown.onSetCountdown(10);
+        countdown.handleStatusChange("paused");
+
+        //wait 3 sec to check total seconds again
+        setTimeout(() => {
+            expect(countdown.state.countdownStatus).toBe("paused");
+            expect(countdown.state.totalSeconds).toBe(10);
+            done();
+        },3001);
+    });
+
+    it('Should stop counting after user clicks stop', (done) => {
+        var countdown = TestUtils.renderIntoDocument(<Countdown />);
+        countdown.onSetCountdown(10);
+        countdown.handleStatusChange("stopped");
+
+        //wait 3 sec to check total seconds again
+        setTimeout(() => {
+            expect(countdown.state.countdownStatus).toBe("stopped");
+            expect(countdown.state.totalSeconds).toBe(0);
+            done();
+        },1001);
+    });
 });
 

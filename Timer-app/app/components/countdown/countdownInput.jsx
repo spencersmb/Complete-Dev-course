@@ -1,5 +1,6 @@
 import react from 'react';
 const React = react;
+const $ = jQuery;
 
 class CountdownInput extends React.Component {
     constructor(){
@@ -9,6 +10,8 @@ class CountdownInput extends React.Component {
     onSubmit(event){
         event.preventDefault();
         let strSeconds = this.refs.seconds.value;
+
+        console.log($('input').length);
 
         if( strSeconds.match(/^[0-9]*$/)) {
             this.props.onSetCountdown(parseInt(strSeconds, 10));

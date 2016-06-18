@@ -20,11 +20,20 @@ class ErrorModal extends React.Component {
       </div>
     );
 
+
+    // Remove node if there is one
+    $(".reveal-overlay").remove();
+
+    // build html and render to string
     var $modal = $(ReactDOMServer.renderToString(modalMarkup));
-    console.log($(ReactDOM.findDOMNode(this)));
+
+    // Attach to domNode
     $(ReactDOM.findDOMNode(this)).html($modal);
 
+    // Create new instance of a modal
     var modal = new Foundation.Reveal($('#error-modal'));
+
+    // Open modal
     modal.open();
   }
   render() {
