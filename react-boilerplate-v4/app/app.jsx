@@ -3,7 +3,7 @@ const React = react;
 var ReactDOM = require('react-dom');
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
-// Import Components
+// Import Componentss
 
 
 // Load foundation manually
