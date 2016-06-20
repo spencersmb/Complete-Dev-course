@@ -20,6 +20,9 @@ module.exports = {
     root: __dirname,
     alias: {
       applicationStyles: 'app/styles/app.scss',
+      TodoApp: 'app/components/TodoApp.jsx',
+      TodoList: 'app/components/TodoList.jsx',
+      TodoItem: 'app/components/TodoItem.jsx'
     },
     extensions: [
       '', '.js', '.jsx', '.html'

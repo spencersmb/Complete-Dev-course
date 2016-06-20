@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 // Import Componentss
-
+import TodoApp from 'TodoApp';
 
 // Load foundation manually
 // require('style!css!foundation-sites/dist/foundation.min.css');
@@ -14,7 +14,7 @@ $(document).foundation();
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-    <p>Boilerplate 3 project</p>,
+    <TodoApp />,
   // <Router history={hashHistory}>
   //     <Route path="/" component={Main}>
   //         <Route path="countdown" component={Countdown} />
