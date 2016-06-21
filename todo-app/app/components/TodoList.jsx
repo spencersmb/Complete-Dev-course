@@ -21,7 +21,9 @@ class TodoList extends React.Component {
 
     return(
       <div>
-        {renderTodos()}
+        <ul className="todo-list">
+          {renderTodos()}
+        </ul>
       </div>
     )
   }

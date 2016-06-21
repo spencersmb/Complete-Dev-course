@@ -3,7 +3,6 @@ var ReactDOM = require('react-dom');
 
 class TodoItem extends React.Component {
 
-
   render(){
     let {id, text} = this.props;
     return(
