@@ -21,6 +21,7 @@ describe('TodoSearch', () => {
     // set input value
     inputForm.refs.searchText.value = searchText;
 
+    // Simulate change
     TestUtils.Simulate.change(inputForm.refs.searchText);
 
     // call false here because its the first of two arguments that get passed
@@ -28,6 +29,16 @@ describe('TodoSearch', () => {
   });
 
   it("Should Call on Search proper checked value", () => {
+    let spy = expect.createSpy();
+    let inputForm = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy}/>);
+    let $el = $(ReactDOM.findDOMNode(inputForm));
 
+    // set input value
+    inputForm.refs.showCompleted.checked = true;
+
+    // Simulate change
+    TestUtils.Simulate.change(inputForm.refs.showCompleted);
+
+    expect(spy).toHaveBeenCalledWith(true, '');
   });
 });

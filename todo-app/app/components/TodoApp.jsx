@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+let uuid = require('node-uuid');
 
 import TodoList from 'TodoList';
 import TodoAdd from 'TodoAdd';
@@ -39,20 +40,16 @@ class TodoApp extends React.Component {
   }
   addTodo(todoText){
 
-    // Create new item
-    let newTodo = {
-      id: this.state.todos.length + 1,
-      text: todoText
-    };
-
-    // Create ref to the state array
-    let currTodos = this.state.todos;
-
-    // Push newTodo on the ref array
-    currTodos.push(newTodo);
-
-    // Set the state with the new array
-    this.setState(currTodos);
+    this.setState({
+      todos: [
+          // insert original todoarray items
+          ...this.state.todos,
+        {
+          id: uuid(),
+          text: todoText
+        }
+      ]
+    });
   }
 
   handleSearch(showCompleted, searchText){
