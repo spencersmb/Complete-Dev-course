@@ -5,6 +5,7 @@ let uuid = require('node-uuid');
 import TodoList from 'TodoList';
 import TodoAdd from 'TodoAdd';
 import TodoSearch from 'TodoSearch';
+import TodoApi from 'TodoApi';
 
 class TodoApp extends React.Component {
 
@@ -13,30 +14,19 @@ class TodoApp extends React.Component {
     super();
     this.addTodo = this.addTodo.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleCheckboxToggle = this.handleCheckboxToggle.bind(this);
 
     this.state = {
       showCompleted: false,
       searchText: '',
-      todos: [
-        {
-          id: 1,
-          text: 'walk the dog'
-        },
-        {
-          id: 2,
-          text: 'clean the yard'
-        },
-        {
-          id: 3,
-          text: 'Do the dishes'
-        },
-        {
-          id: 4,
-          text: 'Moe the lawn'
-        }
-      ]
+      todos: TodoApi.getTodos()
     }
     
+  }
+  componentDidUpdate(){
+    // This gets fired when the props or state updates
+    // This updates even when the filter fires but for now its fine
+    TodoApi.setTodos(this.state.todos);
   }
   addTodo(todoText){
 
@@ -46,7 +36,8 @@ class TodoApp extends React.Component {
           ...this.state.todos,
         {
           id: uuid(),
-          text: todoText
+          text: todoText,
+          completed: false
         }
       ]
     });
@@ -59,8 +50,22 @@ class TodoApp extends React.Component {
     });
   }
 
+  handleCheckboxToggle(id){
+
+    // Map over state of todoItems to find a match
+    let updatedTodos = this.state.todos.map((todo)=>{
+      if(todo.id === id){
+        todo.completed = !todo.completed;
+      }
+      return todo;
+    });
+
+    this.setState({todos: updatedTodos});
+  }
+
   render(){
-  let {todos} = this.state;
+  let {todos, showCompleted, searchText} = this.state;
+  let filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
 
     return (
       <div>
@@ -68,7 +73,7 @@ class TodoApp extends React.Component {
           <div className="small-6 large-centered columns">
             <h3 className="text-center page-title">Main Todo App Container</h3>
             <TodoSearch onSearch={this.handleSearch}/>
-            <TodoList todoList={todos}/>
+            <TodoList todoList={filteredTodos} onToggle={this.handleCheckboxToggle}/>
             <TodoAdd addTodo={this.addTodo} />
           </div>
         </div>
