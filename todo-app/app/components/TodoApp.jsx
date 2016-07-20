@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 let uuid = require('node-uuid');
+let moment = require('moment');
 
 import TodoList from 'TodoList';
 import TodoAdd from 'TodoAdd';
@@ -8,7 +9,6 @@ import TodoSearch from 'TodoSearch';
 import TodoApi from 'TodoApi';
 
 class TodoApp extends React.Component {
-
 
   constructor(){
     super();
@@ -37,7 +37,9 @@ class TodoApp extends React.Component {
         {
           id: uuid(),
           text: todoText,
-          completed: false
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
         }
       ]
     });
@@ -56,6 +58,7 @@ class TodoApp extends React.Component {
     let updatedTodos = this.state.todos.map((todo)=>{
       if(todo.id === id){
         todo.completed = !todo.completed;
+        todo.completedAt = todo.completed ? moment().unix() : undefined;
       }
       return todo;
     });

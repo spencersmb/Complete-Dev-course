@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+let moment = require('moment');
 
 class TodoItem extends React.Component {
 
@@ -14,11 +15,25 @@ class TodoItem extends React.Component {
   }
 
   render(){
-    let {id, text, completed} = this.props;
+    let {id, text, completed, createdAt, completedAt} = this.props;
+    let renderDate = () => {
+      var message = "Created ";
+      var timeStamp = createdAt;
+
+      if(completed){
+        message = "Completed ";
+        timeStamp = completedAt;
+      }
+
+      return message + moment.unix(timeStamp).format('MMM Do, YYYY @ h:mm a');
+    };
+
     return(
         <div>
           <input type="checkbox" checked={completed} onChange={this.handleCheck}/>
-          {text}
+          <p>{text}</p>
+          <p>{renderDate()}</p>
+
         </div>
     )
   }

@@ -22,6 +22,7 @@ module.exports = {
   },
 
   filterTodos: function (todos, showCompleted, searchText) {
+    
     let filteredTodos = todos;
 
     // Filter by showCompleted
@@ -35,6 +36,7 @@ module.exports = {
     // Filter by SearchText
     filteredTodos = filteredTodos.filter((todo)=>{
       let text = todo.text.toLowerCase();
+
       // shorthand way
       return searchText.length === 0 || text.indexOf(searchText) > -1;
     });
