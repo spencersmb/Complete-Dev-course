@@ -13,15 +13,16 @@ $(document).foundation();
 // Load Custom App CSS
 require('style!css!sass!applicationStyles');
 
-ReactDOM.render(
-    <p>Boilerplate 3 project</p>,
-  // <Router history={hashHistory}>
-  //     <Route path="/" component={Main}>
-  //         <Route path="countdown" component={Countdown} />
-  //         <IndexRoute component={Timer}/>
-  //     </Route>
-  // </Router>,
-  document.getElementById('app')
-);
+// ReactDOM.render(
+//     <p>Boilerplate 3 project</p>,
+//   // <Router history={hashHistory}>
+//   //     <Route path="/" component={Main}>
+//   //         <Route path="countdown" component={Countdown} />
+//   //         <IndexRoute component={Timer}/>
+//   //     </Route>
+//   // </Router>,
+//   document.getElementById('app')
+// );
 
-require('./redux-example.jsx');
+// require('./redux-example.jsx');
+require('./redux-todo-example.jsx');
