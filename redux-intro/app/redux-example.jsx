@@ -12,7 +12,8 @@ console.log('starting redux example');
 
 //Subscribe to changes in our store
 // while this is always changing - our components can check if they need to change
-const unsubscribe = store.subscribe(()=>{
+const unsubscribe = store.subscribe( () => {
+  
   let state = store.getState();
   //document.getElementById('app').innerHTML = state.name;
 

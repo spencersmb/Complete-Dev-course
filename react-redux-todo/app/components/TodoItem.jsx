@@ -29,12 +29,12 @@ class TodoItem extends React.Component {
     };
 
     return(
-        <div>
+        <li>
           <input type="checkbox" checked={completed} onChange={this.handleCheck}/>
           <p>{text}</p>
           <p>{renderDate()}</p>
 
-        </div>
+        </li>
     )
   }
 }

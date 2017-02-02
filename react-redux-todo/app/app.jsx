@@ -3,6 +3,21 @@ const React = react;
 var ReactDOM = require('react-dom');
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
+//import Redux stuff
+import * as actions from './actions/actions';
+import {config}  from 'storeConfig';
+const store = config();
+
+store.subscribe( () => {
+
+  console.log('New State', store.getState());
+
+});
+
+store.dispatch(actions.addTodo('Walk the dog'));
+store.dispatch(actions.setSearchText('dog'));
+store.dispatch(actions.toggleShowCompleted());
+
 // Import Componentss
 import TodoApp from 'TodoApp';
 
