@@ -25,10 +25,21 @@
       <file leaf-file-name="redux-example.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/redux-example.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="66" column="12" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+            <state relative-caret-position="581">
+              <caret line="150" column="8" selection-start-line="150" selection-start-column="8" selection-end-line="150" selection-end-column="8" />
               <folding>
-                <element signature="e#230#418#0" expanded="false" />
+                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#287#371#0" expanded="false" />
+                <element signature="e#426#614#0" expanded="false" />
+                <element signature="e#723#774#0" expanded="false" />
+                <element signature="e#805#856#0" expanded="false" />
+                <element signature="e#903#1385#0" expanded="false" />
+                <element signature="e#1494#1545#0" expanded="false" />
+                <element signature="e#1592#2092#0" expanded="false" />
+                <element signature="e#2184#2225#0" expanded="false" />
+                <element signature="e#2263#2314#0" expanded="false" />
+                <element signature="e#2743#2806#0" expanded="false" />
+                <element signature="e#2860#3265#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -37,8 +48,8 @@
       <file leaf-file-name="webpack.config.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webpack.config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+            <state relative-caret-position="166">
+              <caret line="46" column="31" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -47,12 +58,9 @@
       <file leaf-file-name="redux-todo-example.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/redux-todo-example.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="59" selection-end-column="3" />
-              <folding>
-                <element signature="e#375#1035#0" expanded="false" />
-                <marker date="1485990292000" expanded="true" signature="1762:1803" placeholder="{&quot;type&quot;: 'ADD_TODO'...}" />
-              </folding>
+            <state relative-caret-position="-327">
+              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -372,12 +380,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1485963085107</updated>
-      <workItem from="1485963086314" duration="13537000" />
+      <workItem from="1485963086314" duration="15630000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13537000" />
+    <option name="totallyTimeSpent" value="15630000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="8" y="23" width="1912" height="1116" extended-state="6" />
@@ -558,31 +566,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/redux-todo-example.jsx">
+    <entry file="file://$PROJECT_DIR$/../weather-app/app/app.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="59" selection-end-column="3" />
-          <folding>
-            <element signature="e#375#1035#0" expanded="false" />
-            <marker date="1485990292000" expanded="true" signature="1762:1803" placeholder="{&quot;type&quot;: 'ADD_TODO'...}" />
-          </folding>
+        <state relative-caret-position="116">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../weather-app/app/api/openWeatherMap.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+        <state relative-caret-position="166">
+          <caret line="46" column="31" selection-start-line="46" selection-start-column="31" selection-end-line="46" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/redux-todo-example.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-327">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/redux-example.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="66" column="12" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="12" />
+        <state relative-caret-position="581">
+          <caret line="150" column="8" selection-start-line="150" selection-start-column="8" selection-end-line="150" selection-end-column="8" />
           <folding>
-            <element signature="e#230#418#0" expanded="false" />
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#287#371#0" expanded="false" />
+            <element signature="e#426#614#0" expanded="false" />
+            <element signature="e#723#774#0" expanded="false" />
+            <element signature="e#805#856#0" expanded="false" />
+            <element signature="e#903#1385#0" expanded="false" />
+            <element signature="e#1494#1545#0" expanded="false" />
+            <element signature="e#1592#2092#0" expanded="false" />
+            <element signature="e#2184#2225#0" expanded="false" />
+            <element signature="e#2263#2314#0" expanded="false" />
+            <element signature="e#2743#2806#0" expanded="false" />
+            <element signature="e#2860#3265#0" expanded="false" />
           </folding>
         </state>
       </provider>

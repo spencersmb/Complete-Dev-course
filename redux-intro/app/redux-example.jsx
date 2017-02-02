@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 import {createStore, compose, combineReducers} from 'redux';
 // var Redux = require('redux');
 
@@ -6,6 +6,16 @@ console.log('starting redux example');
 
 
 //must be a pure function - the Reducer
+
+// Name Reducer and Action
+// -----------------------
+const changeName = (name) => {
+  return {
+    type: 'CHANGE_NAME',
+    name //ES6 version
+    // name: name
+  }
+};
 const nameReducer = (state = 'Anonymous', action) => {
   //state here is a string because the NAME is a string
   switch (action.type){
@@ -22,22 +32,22 @@ const nameReducer = (state = 'Anonymous', action) => {
   }
 };
 
-const changeName = (name) => {
-  return {
-    type: 'CHANGE_NAME',
-    name //ES6 version
-    // name: name
-  }
-};
 
+// Hobby Reducer and Action
+// -----------------------
+let nextHobbyId = 1;
 const add_hobby = (hobby) => {
   return {
     type: 'ADD_HOBBY',
     hobby
   }
 };
-
-let nextHobbyId = 1;
+const remove_hobby = (id) => {
+  return {
+    type: 'REMOVE_HOBBY',
+    id
+  }
+};
 const hobbyReducer = (state = [], action) => {
   //state here is a string because the NAME is a string
   switch (action.type){
@@ -57,7 +67,6 @@ const hobbyReducer = (state = [], action) => {
     case 'REMOVE_HOBBY':
 
       return [
-        ...state,
         // filter out the item that matches the id to remove it from the array
         state.filter( (hobby) => hobby.id !== action.id )
       ];
@@ -70,7 +79,16 @@ const hobbyReducer = (state = [], action) => {
   }
 };
 
+
+// Movie Reducer and Action
+// -----------------------
 let nextMovieId = 1;
+const add_movie = (movie) => {
+  return {
+    type: 'ADD_MOVIE',
+    movie
+  }
+};
 const movieReducer = (state = [], action) => {
   //state here is a string because the NAME is a string
   switch (action.type){
@@ -103,10 +121,80 @@ const movieReducer = (state = [], action) => {
   }
 };
 
+// Map Reducer and Action
+// -----------------------
+let nextMapId = 1;
+let defaultMap = {
+  isFetching: false,
+  url: undefined
+};
+
+const start_location_fetch = () => {
+  return {
+    type: 'START_LOCATION_FETCH'
+  }
+};
+
+const fetch_location = () => {
+
+  // init with loading icon
+  store.dispatch(start_location_fetch());
+
+  //use axios library - to fetch data
+  axios.get("http://ipinfo.io").then( (response) => {
+
+    let loc = response.data.loc;
+    let baseUrl = 'http://maps.google.com?q=';
+
+    setTimeout(()=>{
+      store.dispatch(complete_location_fetch(baseUrl + loc));
+    }, 2000);
+
+  } )
+};
+
+const complete_location_fetch = (url) => {
+  return {
+    type: 'COMPLETE_LOCATION_FETCH',
+    url
+  }
+};
+
+const mapReducer = (state = defaultMap, action) => {
+
+  switch (action.type){
+
+    case 'START_LOCATION_FETCH':
+
+      return {
+          isFetching: true,
+          url: undefined // this clears out any past URL
+      };
+
+      break;
+
+    //FIRES ONCE WE HAVE THE DATA FROM THE API
+    case 'COMPLETE_LOCATION_FETCH':
+
+      return {
+          isFetching: false,
+          url: action.url
+        };
+
+      break;
+
+    default:
+      return state;
+
+  }
+};
+
+
 const reducer = combineReducers({
   name: nameReducer,
   hobbies: hobbyReducer,
-  movies: movieReducer
+  movies: movieReducer,
+  map: mapReducer
 });
 
 const store = createStore(reducer, compose(
@@ -118,7 +206,14 @@ const store = createStore(reducer, compose(
 // while this is always changing - our components can check if they need to change
 const unsubscribe = store.subscribe(()=>{
   let state = store.getState();
-  document.getElementById('app').innerHTML = state.name;
+  //document.getElementById('app').innerHTML = state.name;
+
+
+  if(state.map.isFetching){
+    document.getElementById('app').innerHTML = 'Loading Map request';
+  }else if( state.map.url ){
+    document.getElementById('app').innerHTML = '<a target="_blank" href="'+ state.map.url +'">View Location</a>';
+  }
 
   console.log("Current State => ", state);
 
@@ -132,13 +227,9 @@ store.dispatch(changeName('Spencer'));
 //dispatch array example
 store.dispatch(add_hobby('work-out'));
 
-store.dispatch({
-  type: 'ADD_MOVIE',
-  movie:'BATMAN'
-});
+store.dispatch(add_movie('BATMAN'));
 
-store.dispatch({
-  type: 'REMOVE_HOBBY',
-  id: 1
-});
+store.dispatch(remove_hobby(1));
+
+fetch_location();
 
