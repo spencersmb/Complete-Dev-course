@@ -4,9 +4,11 @@ console.log("Start Todo Redux Example");
 
 const stateDefault = {
   searchText: '',
-  showCompleted:
-    false, todos: []
+  showCompleted: false,
+  todos: []
 };
+
+let nextTodoId = 1;
 
 //The reducer takes the current state and the action to combine them and return a new state
 let reducer = (state = stateDefault, action) => {
@@ -19,6 +21,30 @@ let reducer = (state = stateDefault, action) => {
       return {
         ...state,
         searchText: action.searchText
+      };
+      break;
+
+    case 'ADD_TODO':
+
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          {
+            id: nextTodoId++, //set unique ID on each item
+            todo: action.todo
+          }
+        ]
+      };
+      break;
+
+    case 'REMOVE_TODO':
+
+      return {
+        ...state,
+        // filter out the item that matches the id to remove it from the array
+        todos: state.todos.filter( (todo) => todo.id !== action.id )
+
       };
       break;
 
@@ -38,6 +64,7 @@ const store = createStore(reducer, compose(
 const unsubscribe = store.subscribe(()=>{
   let state = store.getState();
   document.getElementById('app').innerHTML = state.searchText;
+
   console.log("Current State => ", state);
 
 });
@@ -57,4 +84,20 @@ store.dispatch(action);
 store.dispatch({
   type: 'CHANGE_SEARCH_TEXT',
   searchText: 'Bigum'
+});
+
+//dispatch array example
+store.dispatch({
+  type: 'ADD_TODO',
+  todo:'Work Out'
+});
+
+store.dispatch({
+  type: 'ADD_TODO',
+  todo:'Browser Test Website'
+});
+
+store.dispatch({
+  type: 'REMOVE_TODO',
+  id: 2
 });
