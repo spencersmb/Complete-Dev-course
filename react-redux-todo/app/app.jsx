@@ -4,37 +4,31 @@ var ReactDOM = require('react-dom');
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 //import Redux stuff
+import {Provider} from 'react-redux';
 import * as actions from './actions/actions';
 import {config}  from 'storeConfig';
 const store = config();
 
+//check state in console.log
 store.subscribe( () => {
-
-  console.log('New State', store.getState());
-
+  // console.log('New State', store.getState());
 });
 
-store.dispatch(actions.addTodo('Walk the dog'));
-store.dispatch(actions.setSearchText('dog'));
-store.dispatch(actions.toggleShowCompleted());
+// store.dispatch(actions.addTodo('Give nuna a bath'));
+// store.dispatch(actions.setSearchText('dog'));
+// store.dispatch(actions.toggleShowCompleted());
 
 // Import Componentss
 import TodoApp from 'TodoApp';
 
-// Load foundation manually
-// require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();
 
 // Load Custom App CSS
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-    <TodoApp />,
-  // <Router history={hashHistory}>
-  //     <Route path="/" component={Main}>
-  //         <Route path="countdown" component={Countdown} />
-  //         <IndexRoute component={Timer}/>
-  //     </Route>
-  // </Router>,
+    <Provider store={store}>
+      <TodoApp />
+    </Provider>,
   document.getElementById('app')
 );

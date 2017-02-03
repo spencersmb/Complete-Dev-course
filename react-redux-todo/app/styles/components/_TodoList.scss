@@ -5,6 +5,10 @@
   align-content: center;
   height: 100vh;
 }
+.large-centered{
+  margin: 0 auto;
+  float: none;
+}
 .todo-list{
   display: flex;
   flex-direction: column;

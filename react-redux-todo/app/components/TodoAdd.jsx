@@ -1,8 +1,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+import {connect} from 'react-redux';
+import * as actions from 'actions';
 
-class TodoAdd extends React.Component {
+export class TodoAdd extends React.Component {
 
   constructor(){
     super();
@@ -18,7 +20,8 @@ class TodoAdd extends React.Component {
     if( typeof strTodo === "string" && strTodo.length > 0 ) {
       
       // call function passed into props of this component
-      this.props.addTodo(strTodo);
+      // this.props.addTodo(strTodo);
+      this.props.dispatch(actions.addTodo(strTodo));
       this.refs.form.reset();
       
     }
@@ -36,4 +39,6 @@ class TodoAdd extends React.Component {
     )
   }
 }
-module.exports = TodoAdd;
+
+// module.exports = TodoAdd;
+export default connect()(TodoAdd);

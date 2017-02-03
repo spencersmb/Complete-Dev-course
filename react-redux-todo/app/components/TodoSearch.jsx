@@ -1,36 +1,57 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+import {connect} from 'react-redux';
+import * as actions from 'actions';
 
-
-class TodoSearch extends React.Component {
+export class TodoSearch extends React.Component {
 
   constructor(){
     super();
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleCompleted = this.handleCompleted.bind(this);
   }
 
   handleSearch(){
     // Get checkbox value first
-    let showCompleted = this.refs.showCompleted.checked;
     let searchText = this.refs.searchText.value;
 
     // Pass values up to TodoList
-    this.props.onSearch(showCompleted, searchText);
+    // this.props.onSearch(showCompleted, searchText);
+    
+    //replace with dispatch..
+    this.props.dispatch(actions.setSearchText(searchText));
 
+  }
+
+  handleCompleted(){
+    // let showCompleted = this.refs.showCompleted.checked;
+    this.props.dispatch(actions.toggleShowCompleted());
   }
 
   render(){
 
+    let { dispatch, showCompleted, searchText } = this.props;
+
     return(
         <div>
-            <div><input id="search" type="text" ref="searchText" placeholder="Find a todo" onChange={this.handleSearch}/></div>
+            <div><input id="search" type="text" ref="searchText" placeholder="Find a todo" value={ searchText } onChange={this.handleSearch}/></div>
             <div>
               <label>
-                <input type="checkbox" ref="showCompleted" onChange={this.handleSearch}/><span>Show Completed Todos</span>
+                <input type="checkbox" ref="showCompleted" checked={showCompleted} onChange={this.handleCompleted}/><span>Show Completed Todos</span>
               </label>
             </div>
         </div>
     )
   }
 }
-module.exports = TodoSearch;
+// module.exports = TodoSearch;
+// module.exports = connect()(TodoSearch);
+// Get props from Store State
+export default connect(
+  (state) => {
+    return {
+      showCompleted: state.showCompleted,
+      searchText: state.searchText
+    }
+  }
+)(TodoSearch);

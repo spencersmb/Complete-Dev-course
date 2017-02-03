@@ -8,13 +8,11 @@ import TodoAdd from 'TodoAdd';
 import TodoSearch from 'TodoSearch';
 import TodoApi from 'TodoApi';
 
-class TodoApp extends React.Component {
+export class TodoApp extends React.Component {
 
   constructor(){
     super();
-    this.addTodo = this.addTodo.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    this.handleCheckboxToggle = this.handleCheckboxToggle.bind(this);
 
     this.state = {
       showCompleted: false,
@@ -28,22 +26,6 @@ class TodoApp extends React.Component {
     // This updates even when the filter fires but for now its fine
     TodoApi.setTodos(this.state.todos);
   }
-  addTodo(todoText){
-
-    this.setState({
-      todos: [
-          // insert original todoarray items
-          ...this.state.todos,
-        {
-          id: uuid(),
-          text: todoText,
-          completed: false,
-          createdAt: moment().unix(),
-          completedAt: undefined
-        }
-      ]
-    });
-  }
 
   handleSearch(showCompleted, searchText){
     this.setState({
@@ -52,32 +34,32 @@ class TodoApp extends React.Component {
     });
   }
 
-  handleCheckboxToggle(id){
-
-    // Map over state of todoItems to find a match
-    let updatedTodos = this.state.todos.map((todo)=>{
-      if(todo.id === id){
-        todo.completed = !todo.completed;
-        todo.completedAt = todo.completed ? moment().unix() : undefined;
-      }
-      return todo;
-    });
-
-    this.setState({todos: updatedTodos});
-  }
+  // handleCheckboxToggle(id){
+  //
+  //   // Map over state of todoItems to find a match
+  //   let updatedTodos = this.state.todos.map((todo)=>{
+  //     if(todo.id === id){
+  //       todo.completed = !todo.completed;
+  //       todo.completedAt = todo.completed ? moment().unix() : undefined;
+  //     }
+  //     return todo;
+  //   });
+  //
+  //   this.setState({todos: updatedTodos});
+  // }
 
   render(){
-  let {todos, showCompleted, searchText} = this.state;
-  let filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
+  // let {todos, showCompleted, searchText} = this.state;
+  // let filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
 
     return (
       <div>
         <div className="row">
           <div className="small-6 large-centered columns">
             <h3 className="text-center page-title">Main Todo App Container</h3>
-            <TodoSearch onSearch={this.handleSearch}/>
-            <TodoList todoList={filteredTodos} onToggle={this.handleCheckboxToggle}/>
-            <TodoAdd addTodo={this.addTodo} />
+            <TodoSearch />
+            <TodoList />
+            <TodoAdd />
           </div>
         </div>
       </div>
@@ -85,4 +67,4 @@ class TodoApp extends React.Component {
   }
 }
 
-module.exports = TodoApp;
+export default TodoApp;

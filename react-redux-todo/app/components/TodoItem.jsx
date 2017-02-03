@@ -2,20 +2,26 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 let moment = require('moment');
 
-class TodoItem extends React.Component {
+//redux stuff
+import {connect} from 'react-redux';
+import * as actions from './../actions/actions';
+
+export class TodoItem extends React.Component {
 
   constructor(){
     super();
     this.handleCheck = this.handleCheck.bind(this);
   }
 
+  
   handleCheck(){
     // function passed from todoApp -> todoList -> this item
-    this.props.onToggle(this.props.id);
+    // this.props.onToggle(this.props.id);
+    this.props.dispatch(actions.toggleTodo(this.props.id));
   }
 
   render(){
-    let {id, text, completed, createdAt, completedAt} = this.props;
+    let {id, text, completed, createdAt, completedAt, dispatch} = this.props;
     let renderDate = () => {
       var message = "Created ";
       var timeStamp = createdAt;
@@ -38,4 +44,9 @@ class TodoItem extends React.Component {
     )
   }
 }
-module.exports = TodoItem;
+
+
+//this component doesnt need the list of todos, that is getting passed down from todo list,
+// it needs the ability to dispatch changes
+// module.exports = connect()(TodoItem);
+export default connect()(TodoItem);

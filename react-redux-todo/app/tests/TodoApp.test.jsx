@@ -5,7 +5,10 @@ var ReactDOM = require('react-dom');
 var $ = require('jQuery');
 var TestUtils = require('react-addons-test-utils');
 
-var TodoApp = require('TodoApp');
+import {Provider} from 'react-redux';
+import {config}  from 'storeConfig';
+import TodoApp from 'TodoApp';
+import TodoList from 'TodoList';
 
 
 describe('TodoApp', () => {
@@ -13,63 +16,24 @@ describe('TodoApp', () => {
     expect(TodoApp).toExist();
   });
 
-  it('Should add todo to the todos state on addTodo()', () => {
-    let todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+  //test if the list was rendered
+  it('Should Render todo list', () => {
+    
+    //mock provider and store
+    const store = config();
+    const provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <TodoApp />
+      </Provider>
+    );
 
-    //set state to 0 to easily test
-    todoApp.setState({todos:[]});
-    todoApp.addTodo("test");
+    //fetch components defined in parenthises - search through renderinto document for the first TodoApp Item
+    const todoApp = TestUtils.scryRenderedComponentsWithType(provider, TodoApp)[0]; //grab the first item
 
-    expect(todoApp.state.todos.length).toBe(1);
-    expect(todoApp.state.todos[0].text).toBe("test");
+    //looking for TodoList inside todoApp
+    const todoList = TestUtils.scryRenderedComponentsWithType(todoApp, TodoList);
 
-    // test for date
-    expect(todoApp.state.todos[0].createdAt).toBeA("number");
+    expect(todoList.length).toEqual(1);
   });
 
-  it('Should toggle the todoItem with handleCheckboxToggle to true', () => {
-
-    // Use fake data because eventually static data in the app will be dynamic
-    let todoItem = {
-      id: 11,
-      text: 'test',
-      completed: false,
-      createdAt: 0,
-      completedAt: undefined
-    };
-
-    let todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-    todoApp.setState({todos:[todoItem]});
-
-    expect(todoApp.state.todos[0].completed).toBe(false);
-
-    // toggle check box
-    todoApp.handleCheckboxToggle(todoApp.state.todos[0].id);
-    expect(todoApp.state.todos[0].completed).toBe(true);
-
-    expect(todoApp.state.todos[0].completedAt).toBeA("number");
-  });
-
-  it('Should toggle the todoItem with handleCheckboxToggle to false', () => {
-
-    // Use fake data because eventually static data in the app will be dynamic
-    let todoItem = {
-      id: 11,
-      text: 'test',
-      completed: true,
-      createdAt: 0,
-      completedAt: 0
-    };
-
-    let todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-    todoApp.setState({todos:[todoItem]});
-
-    expect(todoApp.state.todos[0].completed).toBe(true);
-
-    // toggle check box
-    todoApp.handleCheckboxToggle(todoApp.state.todos[0].id);
-    expect(todoApp.state.todos[0].completed).toBe(false);
-
-    expect(todoApp.state.todos[0].completedAt).toNotExist();
-  });
 });
