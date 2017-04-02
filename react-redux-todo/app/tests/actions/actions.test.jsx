@@ -62,5 +62,29 @@ describe( 'Actions', () => {
     expect(response).toEqual(action);
 
   });
+
+  it('Should generate ADD_TODOS action', () => {
+
+    const todos = [
+      {
+        id: 111,
+        text: 'talk to parents',
+        completed: false,
+        completedAt: undefined,
+        createdAt: 500
+      }
+    ];
+    //Action we expect to get back
+    const action = {
+      type: 'ADD_TODOS',
+      todos
+    };
+
+    const response = actions.addTodos(todos);
+
+    // then see if they are equal
+    expect(response).toEqual(action);
+
+  });
   
 });

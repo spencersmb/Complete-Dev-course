@@ -39,7 +39,6 @@ export class TodoItem extends React.Component {
           <input type="checkbox" checked={completed} onChange={this.handleCheck}/>
           <p>{text}</p>
           <p>{renderDate()}</p>
-
         </li>
     )
   }

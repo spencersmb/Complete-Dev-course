@@ -53,6 +53,15 @@ export const todosReducer = (state = [], action) => {
       ];
 
       break;
+
+    case 'ADD_TODOS':
+
+      return [
+        ...state,
+        ...action.todos
+      ];
+
+      break;
     
     case 'TOGGLE_TODO':
 

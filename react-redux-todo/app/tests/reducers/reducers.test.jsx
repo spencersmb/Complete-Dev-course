@@ -60,6 +60,45 @@ describe( 'Reducers', () => {
 
     });
 
+    it('Should add all todos', () => {
+
+      const todos = [
+        {
+          id: 111,
+          text: 'talk to parents',
+          completed: false,
+          completedAt: undefined,
+          createdAt: 500
+        },
+        {
+          id: 123,
+          text: 'Add firebase',
+          completed: false,
+          completedAt: undefined,
+          createdAt: 500
+        }
+      ];
+      const action = {
+        type: 'ADD_TODOS',
+        todos
+      };
+      const initialState = [
+        {
+          id: 321,
+          text: 'First start',
+          completed: false,
+          completedAt: undefined,
+          createdAt: 500
+        }
+      ];
+
+      //empty string is a dummy 'current state'
+      const response = reducers.todosReducer(df(initialState), df(action));
+
+      expect(response.length).toEqual(3);
+
+    });
+
     it('Should toggle todo', () => {
 
       const action = {

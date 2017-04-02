@@ -32,6 +32,9 @@ export class TodoSearch extends React.Component {
 
     let { dispatch, showCompleted, searchText } = this.props;
 
+    //Set SearchText to what is in the Redux Store
+    // show completed toggles is based on the showCompleted Boolean inside the store
+
     return(
         <div>
             <div><input id="search" type="text" ref="searchText" placeholder="Find a todo" value={ searchText } onChange={this.handleSearch}/></div>
@@ -44,9 +47,12 @@ export class TodoSearch extends React.Component {
     )
   }
 }
+
+
 // module.exports = TodoSearch;
 // module.exports = connect()(TodoSearch);
 // Get props from Store State
+// Only returning the values we want from the state in this component
 export default connect(
   (state) => {
     return {

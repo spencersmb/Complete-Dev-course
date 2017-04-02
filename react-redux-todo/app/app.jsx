@@ -4,28 +4,36 @@ var ReactDOM = require('react-dom');
 import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 
 //import Redux stuff
+import TodoApp from 'TodoApp';
 import {Provider} from 'react-redux';
-import * as actions from './actions/actions';
 import {config}  from 'storeConfig';
+import TodoApi from 'TodoApi';
+import * as actions from 'actions';
 const store = config();
 
-//check state in console.log
+//get initial todos and bulk add them to Redux
+//getTodos checks localStorage
+const initialTodos = TodoApi.getTodos();
+
+//After you get them from LocalStorage - add them to redux!
+store.dispatch(actions.addTodos(initialTodos));
+
+//check state on Redux change, and setTodos to localstorage each change
 store.subscribe( () => {
-  // console.log('New State', store.getState());
+  let state = store.getState();
+
+  //add todos everytime state updates
+  TodoApi.setTodos(state.todos);
+
+  // console.log('New State', state);
 });
-
-// store.dispatch(actions.addTodo('Give nuna a bath'));
-// store.dispatch(actions.setSearchText('dog'));
-// store.dispatch(actions.toggleShowCompleted());
-
-// Import Componentss
-import TodoApp from 'TodoApp';
 
 $(document).foundation();
 
 // Load Custom App CSS
 require('style!css!sass!applicationStyles');
 
+//Wrap app inside provider and pass in the store object
 ReactDOM.render(
     <Provider store={store}>
       <TodoApp />
